@@ -1,0 +1,30 @@
+.container {
+    width: 7rem;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    justify-content:space-around;
+    margin: 0 3rem 0 0;
+    align-items: center;
+
+    background:linear-gradient(var(--blue),transparent);
+    background-color:var(--background); /*this your primary color*/
+}
+
+.container img {
+    width: 3rem;
+    height: 3rem;
+}
+
+
+.container button {
+    border: 0;
+    background: transparent;
+    margin: 0;
+}
+
+
+.container > button{
+    margin-bottom: 1rem;
+}
