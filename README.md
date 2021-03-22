@@ -20,3 +20,5 @@ Neste projeto foram implementadas as tecnologias:
 -  [React](https://facebook.github.io/react/)
 -  [NextJS](https://nextjs.org/)
 -  [NextAuth](https://next-auth.js.org/)
+
+## 🔓 Autenticação
