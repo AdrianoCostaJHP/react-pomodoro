@@ -17,8 +17,8 @@ Pomodore
 ## :rocket: Tecnologias
 Neste projeto foram implementadas as tecnologias:
 
--  [React](https://facebook.github.io/react/)
+-  [React](https://facebook.github.io/react/) Uma biblioteca JavaScript para construção de interfaces.
 -  [NextJS](https://nextjs.org/)
--  [NextAuth](https://next-auth.js.org/)
+-  [NextAuth](https://github.com/nextauthjs/next-auth) NextAuth.js é uma solução de autenticação de código aberto para aplicativos Next.js
 
 ## 🔓 Autenticação
