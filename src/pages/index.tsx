@@ -1,64 +1,85 @@
 import React from 'react';
-import {GetServerSideProps} from 'next';
+import { getSession } from 'next-auth/client';
 import Head from 'next/head';
 import styles from '../styles/pages/Home.module.css';
-
+import axios from 'axios';
+import Layout from '../components/Layout';
 
 import { ChallengesProvider } from '../contexts/Challenges';
 import { CompletedChallenges } from '../components/CompletedChallenges';
-import {CountdownProvider} from '../contexts/CountdownContext';
+import { CountdownProvider } from '../contexts/CountdownContext';
 import { Countdown } from '../components/Countdown';
-import {ExperienceBar} from '../components/ExperienceBar';
-import {ChallengeBox} from '../components/ChallengeBox';
+import { ExperienceBar } from '../components/ExperienceBar';
+import { ChallengeBox } from '../components/ChallengeBox';
 import { Profile } from '../components/Profile';
-import { SideBar } from '../components/SideBar';
+
+export default function Home(props) {
 
 
-interface HomeProps{
-  level: number;
-  userExperience: number;
-  challengesCompleteds:number;
-}
-
-export default function Home(props: HomeProps) {
   return (
-    <ChallengesProvider level={props.level} userExperience = {props.userExperience} challengesCompleteds={props.challengesCompleteds}>
+    <ChallengesProvider level={props.level} userExperience={props.userExperience} challengesCompleteds={props.challengesCompleteds}>
       <div className={styles.container}>
         <Head>
           <title>Inicio | Pomodore </title>
         </Head>
-        <SideBar/>
-        <div className={styles.containerData}>
-          <ExperienceBar/>
-        <CountdownProvider>
-          <section className={styles.containerSection}>
-            <div >
-              <Profile/>
-              <CompletedChallenges/>
-              <Countdown/>
-            </div>
-            <div>
-              <ChallengeBox/>
-            </div>
-          </section>
-        </CountdownProvider>
-        </div>
+        <Layout>
+          <ExperienceBar />
+          <CountdownProvider>
+            <section className={styles.containerSection}>
+              <div >
+                <Profile />
+                <CompletedChallenges />
+                <Countdown />
+              </div>
+              <div>
+                <ChallengeBox />
+              </div>
+            </section>
+          </CountdownProvider>
+        </Layout>
       </div>
     </ChallengesProvider>
   )
 }
 
-export const getServerSideProps : GetServerSideProps  = async (ctx) =>{
-  const  {level, userExperience, challengesCompleteds} = ctx.req.cookies;
-
-  
-
-
-  return {
-    props: {
-      level : Number(level),
-      userExperience: Number(userExperience),
-      challengesCompleteds: Number(challengesCompleteds)
+export async function getServerSideProps(context) {
+  const session = await getSession(context)
+  if (!session.user.email) {
+    const  {level, userExperience, challengesCompleteds} = context.req.cookies;
+    return {
+      props: {
+        level : Number(level),
+        userExperience: Number(userExperience),
+        challengesCompleteds: Number(challengesCompleteds)
+      }
     }
   }
+
+  const response = await axios.get(process.env.USER_API_URL, {
+    params: {email: session.user.email}
+  });
+
+  console.log(response);
+  const data = response.data;
+
+  if (data === '') {
+    await axios.post(process.env.RANK_API_URL, {
+      email: session.user.email,
+      name: session.user.name,
+      uri_avatar: session.user.image,
+      level: 1,
+      userExperience: 0,
+      challengesCompleteds: 0
+    })
+  }
+  
+  return {
+      props: {
+        level : data.level,
+        userExperience: data.userExperience,
+        challengesCompleteds: data.challengesCompleteds
+      }
+  }
+
 }
+

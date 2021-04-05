@@ -1,9 +1,9 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
-import {connectToDataBase} from '../../utils/mongodb';
+import { connectToDataBase } from '../../utils/mongodb';
 
 export default async (request: VercelRequest, response: VercelResponse) => {
 
-    const {db} = await connectToDataBase();
+    const { db } = await connectToDataBase();
     const collection = db.collection('users');
 
     try {
@@ -12,21 +12,28 @@ export default async (request: VercelRequest, response: VercelResponse) => {
 
         switch (method) {
             case 'POST':
-                const { email, uri_avatar, level, userExperience, challengesCompleteds } = request.body;
-
-
+                const { 
+                    email, 
+                    name, 
+                    uri_avatar, 
+                    level, 
+                    userExperience, 
+                    challengesCompleteds
+                } = request.body;
 
                 await collection.insertOne({
                     _id: email,
-                    uri_avatar,
-                    level,
-                    userExperience,
-                    challengesCompleteds,
+                    name: name,
+                    uri_avatar: uri_avatar,
+                    level: level,
+                    userExperience: userExperience,
+                    challengesCompleteds: challengesCompleteds,
                     createAt: new Date(),
                 })
 
-                return response.status(201).json({
+                response.status(201).json({
                     'userEmail': email,
+                    'name': name,
                     'uri_avatar': uri_avatar,
                     'level': level,
                     'userExperience': userExperience,
@@ -37,15 +44,27 @@ export default async (request: VercelRequest, response: VercelResponse) => {
             case 'GET':
 
                 const data = await collection.find().toArray();
-                return response.status(201).json(data);
+                response.status(201).json(data);
 
                 break;
 
             case 'PUT':
 
-                return response.status(201).json({
-                    'PUT': 'true'
+                const res = request.body;
+
+                let upData = await collection.findOneAndUpdate({
+                    _id: res.email,
+                }, {
+                    $set: {
+                        level: res.level,
+                        userExperience: res.userExperience,
+                        challengesCompleteds: res.challengesCompleteds
+                    }
+                }, {
+                    upsert: false
                 });
+
+                response.status(201).json({"data": upData});
                 break;
             default:
                 return response.status(405).json({

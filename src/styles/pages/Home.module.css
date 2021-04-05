@@ -4,13 +4,10 @@
     margin: auto;
 
     display: flex;
-    flex-direction:row;
-}
-
-.containerData{
-    padding: 1.5rem 2.5rem;
     
 }
+
+
 .containerSection {
     height: 90vh;
     max-width: 992px;

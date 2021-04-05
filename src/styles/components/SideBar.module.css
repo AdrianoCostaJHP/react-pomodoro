@@ -10,6 +10,7 @@
 
     background:linear-gradient(var(--blue),transparent);
     background-color:var(--background); /*this your primary color*/
+    overflow: scroll;
 }
 
 .container img {

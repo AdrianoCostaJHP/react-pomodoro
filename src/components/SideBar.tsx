@@ -12,7 +12,7 @@ export function SideBar(){
             <div className={styles.logo}>
                 <img src='favicon.png' alt="Logo"/>
             </div>
-            <Link href='/rankPage'>
+            <Link href='/ranked'>
                 <a>
                     <button type="button">{<AiOutlineTrophy size={28} color="#5965E0" />}</button>
                 </a>
@@ -23,12 +23,16 @@ export function SideBar(){
                     <button type="button">{<FaHome size={28} color="#5965E0"/>}</button>
                 </a>
             </Link>
-            <Link href='/loginPage' >
-                <a>
-                    <button type="button" onClick={() => signOut({ callbackUrl: 'http://localhost:3000/loginPage'})}> <AiOutlineLogout  size={28} color="#5965E0"/></button>
-                </a>
+            <a
+                href={`/api/auth/signout`}
+                onClick={(e) => {
+                  e.preventDefault()
+                  signOut({callbackUrl: process.env.LOGIN_URL})
+                }}
+              >
+                <AiOutlineLogout  size={28} color="#5965E0"/>
+              </a>
 
-            </Link>
 
         </div>
     )

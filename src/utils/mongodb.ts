@@ -13,9 +13,9 @@ if(!url){
 
 export async function connectToDataBase() {
 
-    if (cachedDb && cachedClient) {
-        return {client: cachedClient, db: cachedDb}
-    }
+    //if (cachedDb && cachedClient) {
+    //    return {client: cachedClient, db: cachedDb}
+    //}
 
     const client = await MongoClient.connect(uri, {
         useNewUrlParser: true,
