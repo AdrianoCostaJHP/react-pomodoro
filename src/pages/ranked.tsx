@@ -56,7 +56,7 @@ challengesCompleteds: number;
 }
 
 export async function getServerSideProps() {
-    const response = await axios.get(process.env.RANK_API_URL);
+    const response = await axios.get('http://localhost:3000/api/rank');
     const data = response.data;
     return {
         props:{

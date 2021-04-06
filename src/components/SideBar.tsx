@@ -18,7 +18,7 @@ export function SideBar(){
                 </a>
             </Link>
 
-            <Link href='/' >
+            <Link href='/home' >
                 <a>
                     <button type="button">{<FaHome size={28} color="#5965E0"/>}</button>
                 </a>
@@ -27,7 +27,7 @@ export function SideBar(){
                 href={`/api/auth/signout`}
                 onClick={(e) => {
                   e.preventDefault()
-                  signOut({callbackUrl: process.env.LOGIN_URL})
+                  signOut({callbackUrl: 'http://localhost:3000'})
                 }}
               >
                 <AiOutlineLogout  size={28} color="#5965E0"/>

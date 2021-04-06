@@ -54,7 +54,7 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
         async function authenticationSession() {
             const session = await getSession();
             if (!session) {
-                signIn('github', { callbackUrl: process.env.BASE_URL });
+                signIn('', { callbackUrl: 'http://localhost:3000/home' });
             }
         }
         authenticationSession();
