@@ -1,17 +1,12 @@
-.container{
-    display: grid;
-    grid-template-columns: 0.4fr 3fr;
-    grid-template-rows: 20vh 80vh;
-}
 
-.containerData {
+.container {
     flex-direction: column;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     justify-content: center;
     overflow: auto;
 }
-.container .containerData header {
+.container header {
     height: 5rem;
     display:flex;
     align-items: center;
@@ -22,16 +17,20 @@
 
     grid-column-start: 1;
     grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end:3;
 }
-.container .containerData > strong {
+.container header strong {
     font-size: 2rem;
-    color: var(--title);
+    color: var(--title);    
+}
 
-    
+.container main {
+    overflow: auto;
 }
 
 
-.container .containerData main > div{
+.container main > div{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -46,20 +45,38 @@
     grid-column-start: 1;
     grid-column-end: 3;
 }
-.containerData .profile {
+.container .profile {
     display: flex;
     align-items: center;
     
     
 }
-.containerData .profile div {
+.container .profile div {
     display: flex;
-    
     flex-direction:column;
 }
-.containerData .profile > img {
+.container .profile > img {
     width: 5.5rem;
     height: 5.5rem;
     border-radius: 50%;
     margin-right: 0.7rem;
+}
+
+.container .profile .icon{
+    margin-right:0.5rem;
+    margin-top: 0.5rem;
+}
+
+@media only screen and (min-width: 50px) and (max-width:770px){ 
+    .container main >div{
+        flex-direction:column;
+        align-items:center;
+        justify-content: center;
+        margin: 1rem;
+
+    }
+
+    .container .profile{
+        flex-direction:column;
+    }
 }

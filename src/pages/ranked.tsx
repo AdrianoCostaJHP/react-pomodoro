@@ -2,68 +2,77 @@ import axios from 'axios';
 import Head from 'next/head';
 import styles from '../styles/pages/Ranked.module.css';
 import Layout from '../components/Layout';
+import { useEffect, useState } from 'react';
+import Loading from '../components/Loading';
+import PrivateRoutes from '../components/PrivateRoutes';
 
 interface userData {
-_id: string;
-uri_avatar: string;
-level: number;
-userExperience: number;
-challengesCompleteds: number;
+    _id: string;
+    name: string;
+    uri_avatar: string;
+    level: number;
+    userExperience: number;
+    challengesCompleteds: number;
 }
 
- export default function Ranked({data}){
-     console.log(data);
+function Ranked() {
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
 
+    useEffect(() => {
+        async function request() {
+            const response = await axios.get('http://localhost:3000/api/rank');
+            setData(response.data);
+            setLoading(false);
+        }
+        request();
+    }, [])
 
-    return(
-        <div className={styles.container}>
+    return (
+        <Layout>
             <Head>
-            <title>Ranked | Pomodore </title>
+                <title>Ranked | Pomodore </title>
             </Head>
-            
-            <Layout>
+            {loading ? (<Loading />) :
+                (
+                    <div className={styles.container}>
+                        <header>
+                            <strong>Ranked</strong>
+                        </header>
 
-            <div className={styles.containerData}>
-            <header>
-                <strong>Ranked</strong>
-            </header>
-            
-            <main>
-                {data.map((user: userData) =>(
-                        
-                    <div >
-                        <div className={styles.profile} key={user._id} >
-                            <img src={user.uri_avatar} alt="avatar"  />
-                            <div>
-                                <strong>Adriano Costa</strong>
-                                <p>
-                                    <img src="icons/level.svg" alt="Level"/>
-                                    Level {user.level}
-                                </p>
-                            </div>
-                        </div>
-                        <p>{user.challengesCompleteds} desafios concluidos</p>
-                        <p>{user.userExperience} XP</p>
+                        <main>
+                            {data.map((user: userData) => (
+
+                                <div key={user._id}>
+                                    <div className={styles.profile}  >
+                                        <img src={user.uri_avatar} alt="avatar" />
+                                        <div>
+                                            <strong>{user.name}</strong>
+                                            <p >
+                                                <img src="icons/level.svg" alt="Level" className={styles.icon} />
+                                                Level {user.level}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <p> <strong>{user.challengesCompleteds}</strong> desafios concluidos</p>
+                                    <strong>{user.userExperience} XP</strong>
+                                </div>
+
+                            ))}
+                        </main>
                     </div>
-
-                        ))}
-            </main>
-            </div>
-            </Layout>
-        </div>
+                )}
+        </Layout>
     )
 
 }
 
-export async function getServerSideProps() {
-    const response = await axios.get('http://localhost:3000/api/rank');
-    const data = response.data;
-    return {
-        props:{
-            data
-        }
-    }
-}
+Ranked.getInitialProps = async props => {
+    console.info('##### Congratulations! You are authorized! ######', props);
+    return {};
+};
+
+export default PrivateRoutes(Ranked);
 
 
 

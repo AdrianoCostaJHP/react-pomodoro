@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { getSession } from 'next-auth/client';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 import styles from '../styles/pages/Home.module.css';
 import axios from 'axios';
 import Layout from '../components/Layout';
+import Loading from '../components/Loading';
 
 import { ChallengesProvider } from '../contexts/Challenges';
 import { CompletedChallenges } from '../components/CompletedChallenges';
@@ -14,16 +16,30 @@ import { ChallengeBox } from '../components/ChallengeBox';
 import { Profile } from '../components/Profile';
 
 export default function Home(props) {
+  const router = useRouter()
+  const [loading, setLoading] = useState(true);
+  useEffect(() =>{
+    const session = getSession();
+    if(!session){
+      router.push("/login");
+    }
+    if(props){
+      setLoading(false);
+    }
+  },[])
 
 
   return (
     <ChallengesProvider level={props.level} userExperience={props.userExperience} challengesCompleteds={props.challengesCompleteds}>
-      <div className={styles.container}>
+    {loading?(<Loading/>):(
+        <Layout>
+        <div className={styles.container}>
         <Head>
           <title>Inicio | Pomodore </title>
         </Head>
-        <Layout>
+        <div className={styles.expContainer}>
           <ExperienceBar />
+        </div>
           <CountdownProvider>
             <section className={styles.containerSection}>
               <div >
@@ -36,9 +52,11 @@ export default function Home(props) {
               </div>
             </section>
           </CountdownProvider>
+        </div>
         </Layout>
-      </div>
+    )}
     </ChallengesProvider>
+    
   )
 }
 

@@ -9,8 +9,7 @@
     align-items: center;
 
     background:linear-gradient(var(--blue),transparent);
-    background-color:var(--background); /*this your primary color*/
-    overflow: scroll;
+    background-color:var(--background); 
 }
 
 .container img {
@@ -29,3 +28,21 @@
 .container > button{
     margin-bottom: 1rem;
 }
+
+@media only screen and (min-width: 100px) and (max-width:640px){
+    .container{
+        width: 100vw;
+        height: 5rem;
+        flex-direction: row;
+        position: absolute;
+        bottom: 0;
+        justify-content:space-around;
+        margin-right: 1rem;
+        background: var(--background);
+        box-shadow: 10px 0 60px  rgba(0, 0, 0, 0.3) ;
+
+    }
+    .container .logo{
+        display: none;
+    }
+ }
