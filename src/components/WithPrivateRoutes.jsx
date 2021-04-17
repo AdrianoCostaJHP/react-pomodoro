@@ -14,7 +14,7 @@ const checkUserAuthentication = async (context) => {
     return{auth: null};
 };
 
-export default function myComponent(WrappedComponent){
+export default function privateRoutes(WrappedComponent){
   const hocComponent = ({ ...props }) => <WrappedComponent {...props} />;
   
   hocComponent.getInitialProps = async (context) => {

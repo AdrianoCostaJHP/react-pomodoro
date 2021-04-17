@@ -1,9 +1,9 @@
 import { createContext, useState, useEffect, ReactNode } from 'react';
-import { getSession, signIn} from 'next-auth/client';
+import { getSession, signIn } from 'next-auth/client';
 import Cookies from 'js-cookie';
+import axios from 'axios';
 import challenges from '../../challenges.json';
 import { LevelUpModal } from '../components/LevelUpModal';
-import axios from 'axios';
 
 
 interface Challenge {
@@ -37,7 +37,7 @@ export const ChallengesContext = createContext({} as ChallengesDataType);
 
 export function ChallengesProvider({ children, ...rest }: ChallengesProviderProps) {
 
-    
+
     const [level, setLevel] = useState(rest.level ?? 1);
     const [userExperience, setUserExperience] = useState(rest.userExperience ?? 0);
     const [challengesCompleteds, setChallengesCompleteds] = useState(rest.challengesCompleteds ?? 0);
@@ -61,17 +61,17 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
     }, [])
 
     useEffect(() => {
-        async function setData(){
+        async function setData() {
             const session = await getSession();
-            if(!session.user.email){
+            if (!session.user.email) {
                 Cookies.set('level', String(level));
                 Cookies.set('userExperience', String(userExperience));
                 Cookies.set('challengesCompleteds', String(challengesCompleteds));
             }
-            else{
+            else {
                 updateUser();
             }
-        } 
+        }
         setData();
     }, [level, userExperience, challengesCompleteds]);
 

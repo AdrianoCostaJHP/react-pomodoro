@@ -1,7 +1,7 @@
-import { signIn} from 'next-auth/client';
+import { signIn } from 'next-auth/client';
 import styles from '../styles/pages/Login.module.css';
-import { FaArrowRight, FaGithub } from 'react-icons/fa';
 import Head from 'next/head';
+import { FaArrowRight, FaGithub } from 'react-icons/fa';
 
 
 export default function Login() {

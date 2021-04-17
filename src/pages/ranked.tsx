@@ -1,10 +1,11 @@
-import axios from 'axios';
-import Head from 'next/head';
-import styles from '../styles/pages/Ranked.module.css';
-import Layout from '../components/Layout';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
+import styles from '../styles/pages/Ranked.module.css';
+import Head from 'next/head';
+
+import Layout from '../components/Layout';
 import Loading from '../components/Loading';
-import PrivateRoutes from '../components/PrivateRoutes';
+import WithPrivateRoutes from '../components/WithPrivateRoutes';
 
 interface userData {
     _id: string;
@@ -39,10 +40,8 @@ function Ranked() {
                         <header>
                             <strong>Ranked</strong>
                         </header>
-
                         <main>
                             {data.map((user: userData) => (
-
                                 <div key={user._id}>
                                     <div className={styles.profile}  >
                                         <img src={user.uri_avatar} alt="avatar" />
@@ -72,7 +71,7 @@ Ranked.getInitialProps = async props => {
     return {};
 };
 
-export default PrivateRoutes(Ranked);
+export default WithPrivateRoutes(Ranked);
 
 
 
