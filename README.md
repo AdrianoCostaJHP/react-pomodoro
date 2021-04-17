@@ -21,9 +21,9 @@ Neste projeto foram implementadas as tecnologias:
 
 ## 🔓 Autenticação
 
-Para realizar a autenticação com o GitHub foi utilizado o [NextAuth](https://next-auth.js.org/), que tambem fornece outros [provedores](https://next-auth.js.org/configuration/providers) para autenticação.
+ Para a autenticação com o GitHub foi utilizado o [NextAuth](https://next-auth.js.org/), que tambem fornece outros [provedores](https://next-auth.js.org/configuration/providers) de autenticação. Para testar a autenticação você precisa criar um [aplicativo OAuth](https://docs.github.com/pt/developers/apps/building-oauth-apps), que vai gerar um ClientId e um ClientSecret.
 
-```javascript theme="dark"
+```javascript "
 import Providers from `next-auth/providers`
 ...
 providers: [
@@ -34,4 +34,31 @@ providers: [
 ]
 ...
 
-``` 
+```
+## :information_source: Como usar
+
+Para testar o projeto:
+
+```bash
+# Clone this repository
+$ git clone https://github.com/AdrianoCostaJHP/react-pomodore.git
+
+# Go into the repository
+$ cd react-pomodore
+
+# Install dependencies
+$ yarn
+
+# Run the app 
+$ yarn dev
+
+#open it in the browser on port 3000
+http://localhost:3000
+```
+
+## :memo: Licença
+Este projeto esta sob a licença do MIT.
+
+---
+
+Feito por Adriano Costa 💻♥ [Entrar em contato!](https://www.linkedin.com/in/adriano-costa-101395141/)
