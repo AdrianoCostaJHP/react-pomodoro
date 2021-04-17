@@ -7,6 +7,16 @@ Pomodore
 <p align = "center">
   <img src="public/presentation.gif" alt="presentation">
 </p>
+</br>
+<p align = "center">
+  <img>
+![GitHub top language](https://img.shields.io/github/languages/top/AdrianoCostaJHP/react-pomodore)
+![GitHub language count](https://img.shields.io/github/languages/count/AdrianoCostaJHP/react-pomodore)
+![GitHub](https://img.shields.io/github/license/AdrianoCostaJHP/react-pomodore)
+[![Linkedin Badge](https://img.shields.io/badge/-AdrianoCosta-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/adriano-costa-101395141/)](https://www.linkedin.com/in/adriano-costa-101395141/)
+</p>
+ 
+
 
 ## :rocket: Tecnologias
 Neste projeto foram implementadas as tecnologias:
