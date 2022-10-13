@@ -1,8 +1,9 @@
-<h1 align = "center">
-Pomodore
-</h1>
+<div align="center">
+  <img  src="src/assets/pomodoro.png" alt="pomodoro" alt="120">
+</div>
+<h1 align = "center">React Pomodoro</h1>
 <h4 align="center">
-  <p align = "center">Aplicação que implementa a técnica de estudo Pomodoro 📖 📝<p/> 
+  <p align = "center">App desenvolvido aplicando a técnica de estudo Pomodoro 📖:watch:<p/> 
 </h4>
 <p align = "center">
   <img src="public/presentation.gif" alt="presentation">
@@ -42,10 +43,10 @@ Para testar o projeto:
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/AdrianoCostaJHP/react-pomodore.git
+$ git clone https://github.com/AdrianoCostaJHP/react-pomodoro.git
 
 # Go into the repository
-$ cd react-pomodore
+$ cd react-pomodoro
 
 # Install dependencies
 $ yarn
